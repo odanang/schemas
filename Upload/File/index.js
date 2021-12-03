@@ -3,10 +3,10 @@ let { fileAdapter, fileHooks } = require("@itoa/lib/stores");
 let { roleSimple } = require("@itoa/lib/access");
 const { atTracking, byTracking } = require("@itoa/list-plugins");
 
-const { models } = require("@itoa/schemas/config");
+const config = require("@itoa/schemas/config");
 
 const uploadFile = {
-  active: models.includes("UploadFile"),
+  active: models[process.env.GROUP].includes("UploadFile"),
   fields: {
     file: {
       type: File,

@@ -1,3 +1,5 @@
 module.exports = {
-  models: ["User"],
+  auth: ["User"],
+  post: ["PostTag", "Post"],
+  interactive: ["InteractiveComment", "InteractiveReaction", "Interactive"],
 };

@@ -3,9 +3,9 @@ const { Text, Relationship } = require("@itoa/fields");
 // const { multipleLanguage } = require("@itoa/lib/plugins");
 const { atTracking, byTracking } = require("@itoa/list-plugins");
 const { content } = require("./hook");
-const { models } = require("@itoa/schemas/config");
+const config = require("@itoa/schemas/config");
 const comment = {
-  active: models.includes("InteractiveComment"),
+  active: models[process.env.GROUP].includes("InteractiveComment"),
   fields: {
     content: {
       type: Text,
@@ -23,7 +23,7 @@ const comment = {
   plugins: [atTracking(), byTracking()],
 };
 
-if (models.includes("Interactive")) {
+if (models[process.env.GROUP].includes("Interactive")) {
   comment.fields.interactive = {
     type: Relationship,
     ref: "Interactive.comments",

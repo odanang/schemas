@@ -4,10 +4,10 @@ const { Text, Relationship, Images } = require("@itoa/fields");
 const { atTracking, byTracking } = require("@itoa/list-plugins");
 // const { users } = require("@itoa/lib/cache");
 const { content } = require("./hook");
-const { models } = require("@itoa/schemas/config");
+const config = require("@itoa/schemas/config");
 
 const post = {
-  active: models.includes("Post"),
+  active: models[process.env.GROUP].includes("Post"),
   fields: {
     content: {
       type: Text,
@@ -25,14 +25,14 @@ const post = {
   plugins: [atTracking(), byTracking()],
 };
 
-if (models.includes("PostTag")) {
+if (models[process.env.GROUP].includes("PostTag")) {
   post.fields.tags = {
     type: Relationship,
     ref: "PostTag",
     many: true,
   };
 }
-if (models.includes("UploadImage")) {
+if (models[process.env.GROUP].includes("UploadImage")) {
   post.fields.images = {
     type: Images,
     ref: "UploadImage",
@@ -42,7 +42,7 @@ if (models.includes("UploadImage")) {
     many: true,
   };
 }
-if (models.includes("Interactive")) {
+if (models[process.env.GROUP].includes("Interactive")) {
   post.fields.interactive = {
     type: Relationship,
     ref: "Interactive.post",

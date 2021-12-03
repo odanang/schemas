@@ -2,10 +2,10 @@ const { Relationship } = require("@itoa/fields");
 // const { roleSimple } = require("@itoa/lib/access");
 // const { multipleLanguage } = require("@itoa/lib/plugins");
 const { atTracking, byTracking } = require("@itoa/list-plugins");
-const { models } = require("@itoa/schemas/config");
+const config = require("@itoa/schemas/config");
 const { hook } = require("./hook");
 const interactive = {
-  active: models.includes("Interactive"),
+  active: models[process.env.GROUP].includes("Interactive"),
   fields: {},
   // ...multipleLanguage("Translate"),
   labelField: "",
@@ -18,7 +18,7 @@ const interactive = {
   plugins: [atTracking(), byTracking()],
 };
 
-if (models.includes("InteractiveReaction")) {
+if (models[process.env.GROUP].includes("InteractiveReaction")) {
   interactive.fields.reactions = {
     type: Relationship,
     ref: "InteractiveReaction.interactive",
@@ -26,14 +26,14 @@ if (models.includes("InteractiveReaction")) {
   };
 }
 
-if (models.includes("InteractiveComment")) {
+if (models[process.env.GROUP].includes("InteractiveComment")) {
   interactive.fields.comments = {
     type: Relationship,
     ref: "InteractiveComment.interactive",
     many: true,
   };
 }
-if (models.includes("Post")) {
+if (models[process.env.GROUP].includes("Post")) {
   interactive.fields.post = {
     type: Relationship,
     ref: "Post.interactive",

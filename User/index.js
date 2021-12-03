@@ -11,10 +11,10 @@ const { imageAdapter, imageHooks } = require("@itoa/lib/stores");
 // const { multipleLanguage } = require("@itoa/lib/plugins");
 const { atTracking } = require("@itoa/list-plugins");
 const { modelUser } = require("@itoa/lib/access");
-const { models } = require("@itoa/schemas/config");
+const config = require("@itoa/schemas/config");
 
 var user = {
-  active: models.includes("User"),
+  active: models[process.env.GROUP].includes("User"),
   fields: {
     phone: {
       type: Text,
@@ -83,7 +83,7 @@ var user = {
   },
   plugins: [atTracking()],
 };
-if (models.includes("Post"))
+if (models[process.env.GROUP].includes("Post"))
   user.fields.posts = {
     type: Relationship,
     ref: "Post",
