@@ -1,16 +1,17 @@
-const { Text, Relationship } = require("@itoa/fields");
-const { roleSimple } = require("@itoa/lib/access");
-const { multipleLanguage } = require("@itoa/lib/plugins");
+const { Text } = require("@itoa/fields");
+// const { roleSimple } = require("@itoa/lib/access");
+// const { multipleLanguage } = require("@itoa/lib/plugins");
 const { byTracking } = require("@itoa/list-plugins");
+const { models } = require("@itoa/schemas/config");
 const postTag = {
-  active: !process.env.AUTH,
+  active: models.includes("PostTag"),
   fields: {
     content: {
       type: Text,
       isRequired: true,
     },
   },
-  ...multipleLanguage("Translate"),
+  // ...multipleLanguage("Translate"),
 
   labelField: "content",
   access: true,

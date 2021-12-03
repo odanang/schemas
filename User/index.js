@@ -6,13 +6,15 @@ const {
   Editor,
   Relationship,
 } = require("@itoa/fields");
-const { users } = require("@itoa/lib/cache");
+// const { users } = require("@itoa/lib/cache");
 const { imageAdapter, imageHooks } = require("@itoa/lib/stores");
-const { multipleLanguage } = require("@itoa/lib/plugins");
+// const { multipleLanguage } = require("@itoa/lib/plugins");
 const { atTracking } = require("@itoa/list-plugins");
 const { modelUser } = require("@itoa/lib/access");
+const { models } = require("@itoa/schemas/config");
+
 var user = {
-  active: true,
+  active: models.includes("User"),
   fields: {
     phone: {
       type: Text,
@@ -62,7 +64,7 @@ var user = {
       type: Text,
     },
 
-    ...(!process.env.AUTH && multipleLanguage("Translate")),
+    // ...(!process.env.AUTH && multipleLanguage("Translate")),
   },
   labelField: "domain",
   access: modelUser,
@@ -81,7 +83,7 @@ var user = {
   },
   plugins: [atTracking()],
 };
-if (!process.env.AUTH)
+if (models.includes("Post"))
   user.fields.posts = {
     type: Relationship,
     ref: "Post",

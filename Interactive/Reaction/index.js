@@ -1,9 +1,11 @@
 const { Select, Relationship } = require("@itoa/fields");
-const { roleSimple } = require("@itoa/lib/access");
-const { multipleLanguage } = require("@itoa/lib/plugins");
+// const { roleSimple } = require("@itoa/lib/access");
+// const { multipleLanguage } = require("@itoa/lib/plugins");
 const { atTracking, byTracking } = require("@itoa/list-plugins");
+const { models } = require("@itoa/schemas/config");
+
 const reaction = {
-  active: !process.env.AUTH,
+  active: models.includes("InteractiveReaction"),
   fields: {
     emoji: {
       options: [
@@ -16,13 +18,8 @@ const reaction = {
       type: Select,
       isRequired: true,
     },
-    // interactive: {
-    //   type: Relationship,
-    //   ref: "Interactive.reactions",
-    //   many: false,
-    // },
   },
-  ...multipleLanguage("Translate"),
+  // ...multipleLanguage("Translate"),
   labelField: "",
   access: true,
   hooks: {},
@@ -32,4 +29,13 @@ const reaction = {
   },
   plugins: [atTracking(), byTracking()],
 };
+
+if (models.includes("Interactive")) {
+  reaction.fields.interactive = {
+    type: Relationship,
+    ref: "Interactive.reactions",
+    many: false,
+  };
+}
+
 module.exports = reaction;

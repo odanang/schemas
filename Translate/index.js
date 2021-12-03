@@ -3,8 +3,10 @@ const { MongoId } = require("@itoa/fields-mongoid");
 
 const { roleSimple } = require("@itoa/lib/access");
 
+const { models } = require("@itoa/schemas/config");
+
 const translate = {
-  active: !process.env.AUTH,
+  active: models.includes("Translate"),
   fields: {
     item: { type: MongoId, isRequired: true },
     listKey: { type: Text, isRequired: true },

@@ -1,10 +1,11 @@
 let { File, Text } = require("@itoa/fields");
 let { imageAdapter, imageHooks } = require("@itoa/lib/stores");
-let { roleSeller, roleSimple } = require("@itoa/lib/access");
+let { roleSimple } = require("@itoa/lib/access");
 const { atTracking, byTracking } = require("@itoa/list-plugins");
+const { models } = require("@itoa/schemas/config");
 
 const uploadImage = {
-  active: !process.env.AUTH,
+  active: models.includes("UploadImage"),
   fields: {
     file: {
       type: File,
