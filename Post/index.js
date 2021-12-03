@@ -7,7 +7,7 @@ const { content } = require("./hook");
 const config = require("@itoa/schemas/config");
 
 const post = {
-  active: models[process.env.GROUP].includes("Post"),
+  active: config[process.env.GROUP].includes("Post"),
   fields: {
     content: {
       type: Text,
@@ -25,14 +25,14 @@ const post = {
   plugins: [atTracking(), byTracking()],
 };
 
-if (models[process.env.GROUP].includes("PostTag")) {
+if (config[process.env.GROUP].includes("PostTag")) {
   post.fields.tags = {
     type: Relationship,
     ref: "PostTag",
     many: true,
   };
 }
-if (models[process.env.GROUP].includes("UploadImage")) {
+if (config[process.env.GROUP].includes("UploadImage")) {
   post.fields.images = {
     type: Images,
     ref: "UploadImage",
@@ -42,7 +42,7 @@ if (models[process.env.GROUP].includes("UploadImage")) {
     many: true,
   };
 }
-if (models[process.env.GROUP].includes("Interactive")) {
+if (config[process.env.GROUP].includes("Interactive")) {
   post.fields.interactive = {
     type: Relationship,
     ref: "Interactive.post",

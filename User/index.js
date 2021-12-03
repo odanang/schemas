@@ -14,7 +14,7 @@ const { modelUser } = require("@itoa/lib/access");
 const config = require("@itoa/schemas/config");
 
 var user = {
-  active: models[process.env.GROUP].includes("User"),
+  active: config[process.env.GROUP].includes("User"),
   fields: {
     phone: {
       type: Text,
@@ -83,7 +83,7 @@ var user = {
   },
   plugins: [atTracking()],
 };
-if (models[process.env.GROUP].includes("Post"))
+if (config[process.env.GROUP].includes("Post"))
   user.fields.posts = {
     type: Relationship,
     ref: "Post",

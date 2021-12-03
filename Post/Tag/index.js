@@ -4,7 +4,7 @@ const { Text } = require("@itoa/fields");
 const { byTracking } = require("@itoa/list-plugins");
 const config = require("@itoa/schemas/config");
 const postTag = {
-  active: models[process.env.GROUP].includes("PostTag"),
+  active: config[process.env.GROUP].includes("PostTag"),
   fields: {
     content: {
       type: Text,

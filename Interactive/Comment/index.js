@@ -5,7 +5,7 @@ const { atTracking, byTracking } = require("@itoa/list-plugins");
 const { content } = require("./hook");
 const config = require("@itoa/schemas/config");
 const comment = {
-  active: models[process.env.GROUP].includes("InteractiveComment"),
+  active: config[process.env.GROUP].includes("InteractiveComment"),
   fields: {
     content: {
       type: Text,
@@ -23,7 +23,7 @@ const comment = {
   plugins: [atTracking(), byTracking()],
 };
 
-if (models[process.env.GROUP].includes("Interactive")) {
+if (config[process.env.GROUP].includes("Interactive")) {
   comment.fields.interactive = {
     type: Relationship,
     ref: "Interactive.comments",

@@ -4,7 +4,7 @@ const { Checkbox, Relationship } = require("@itoa/fields");
 const { atTracking, byTracking } = require("@itoa/list-plugins");
 const config = require("@itoa/schemas/config");
 const relationship = {
-  active: models[process.env.GROUP].includes("Relationship"),
+  active: config[process.env.GROUP].includes("Relationship"),
   fields: {
     isAccepted: {
       type: Checkbox,
@@ -21,7 +21,7 @@ const relationship = {
   },
   plugins: [atTracking(), , byTracking()],
 };
-if (models[process.env.GROUP].includes("User")) {
+if (config[process.env.GROUP].includes("User")) {
   relationship.fields.to = {
     type: Relationship,
     ref: "User",

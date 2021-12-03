@@ -5,7 +5,7 @@ const { atTracking, byTracking } = require("@itoa/list-plugins");
 const config = require("@itoa/schemas/config");
 
 const reaction = {
-  active: models[process.env.GROUP].includes("InteractiveReaction"),
+  active: config[process.env.GROUP].includes("InteractiveReaction"),
   fields: {
     emoji: {
       options: [
@@ -30,7 +30,7 @@ const reaction = {
   plugins: [atTracking(), byTracking()],
 };
 
-if (models[process.env.GROUP].includes("Interactive")) {
+if (config[process.env.GROUP].includes("Interactive")) {
   reaction.fields.interactive = {
     type: Relationship,
     ref: "Interactive.reactions",

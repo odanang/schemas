@@ -6,7 +6,7 @@ const { atTracking, byTracking } = require("@itoa/list-plugins");
 const config = require("@itoa/schemas/config");
 
 const uploadFile = {
-  active: models[process.env.GROUP].includes("UploadFile"),
+  active: config[process.env.GROUP].includes("UploadFile"),
   fields: {
     file: {
       type: File,

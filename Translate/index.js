@@ -6,7 +6,7 @@ const { roleSimple } = require("@itoa/lib/access");
 const config = require("@itoa/schemas/config");
 
 const translate = {
-  active: models[process.env.GROUP].includes("Translate"),
+  active: config[process.env.GROUP].includes("Translate"),
   fields: {
     item: { type: MongoId, isRequired: true },
     listKey: { type: Text, isRequired: true },
