@@ -49,5 +49,11 @@ if (models.includes("Interactive")) {
     many: false,
   };
 }
-
+if (models.includes("User")) {
+  post.fields.savedByUsers = {
+    type: Relationship,
+    ref: "User.savedPosts",
+    many: false,
+  };
+}
 module.exports = post;
