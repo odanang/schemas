@@ -47,10 +47,6 @@ var user = {
       },
       adminConfig: { className: "col-sm-12 col-md-6" },
     },
-    // isSeller: {
-    //   type: Checkbox,
-    //   adminConfig: { className: "col-sm-12 col-md-6" },
-    // },
     description: {
       type: Editor,
       label: "Mô tả",
@@ -63,8 +59,6 @@ var user = {
     gender: {
       type: Text,
     },
-
-    // ...(!process.env.AUTH && multipleLanguage("Translate")),
   },
   labelField: "domain",
   access: modelUser,
@@ -83,11 +77,17 @@ var user = {
   },
   plugins: [atTracking()],
 };
-if (models.includes("Post"))
+if (models.includes("Post")) {
   user.fields.posts = {
     type: Relationship,
     ref: "Post",
     many: true,
   };
+  user.fields.savedPosts = {
+    type: Relationship,
+    ref: "Post.savedByUsers",
+    many: true,
+  };
+}
 
 module.exports = user;
